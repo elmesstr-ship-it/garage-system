@@ -6,77 +6,128 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+const features = [
+  {
+    icon: Building2,
+    title: "Manage Garage",
+    text: "Control parking spaces, availability, and garage operations easily.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Verified Provider",
+    text: "Build trust with users through a verified provider profile.",
+  },
+  {
+    icon: Users,
+    title: "Reach More Users",
+    text: "Receive more parking requests and grow your garage business.",
+  },
+];
+
 export default function ProviderPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-6 py-20 text-white">
-      <section className="max-w-7xl mx-auto text-center">
-        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
-          Become a{" "}
-          <span className="text-blue-400">Service Provider</span>
-        </h1>
+    <main className="min-h-screen px-6 py-16 text-white" style={{ background: "#060d1f" }}>
 
-        <p className="mt-6 text-lg text-slate-300 max-w-3xl mx-auto leading-8">
-          Join Smart Garage and manage your garage services through a modern
-          dashboard built for providers.
-        </p>
+      {/* grid texture */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(#3b82f6 1px, transparent 1px), linear-gradient(90deg, #3b82f6 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-        <div className="grid md:grid-cols-3 gap-6 mt-14">
-          {[
-            {
-              icon: Building2,
-              title: "Manage Garage",
-              text: "Control parking spaces, availability, and garage operations easily.",
-            },
-            {
-              icon: BadgeCheck,
-              title: "Verified Provider",
-              text: "Build trust with users through a verified provider profile.",
-            },
-            {
-              icon: Users,
-              title: "Reach More Users",
-              text: "Receive more parking requests and grow your garage business.",
-            },
-          ].map((item) => {
-            const Icon = item.icon;
+      <section className="max-w-5xl mx-auto relative z-10 space-y-12">
 
-            return (
-              <div
-                key={item.title}
-                className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl hover:-translate-y-2 transition"
-              >
-                <div className="mx-auto mb-5 w-20 h-20 rounded-3xl bg-blue-500/20 flex items-center justify-center">
-                  <Icon className="text-blue-400" size={42} />
-                </div>
+        {/* header */}
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            <span className="text-blue-300 text-xs font-medium tracking-widest uppercase">
+              Partners Program
+            </span>
+          </div>
 
-                <h2 className="text-2xl font-bold">
-                  {item.title}
-                </h2>
+          <h1
+            className="text-4xl md:text-6xl font-black text-white leading-tight"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            Become a{" "}
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: "linear-gradient(135deg, #60a5fa, #3b82f6)" }}
+            >
+              Service Provider
+            </span>
+          </h1>
 
-                <p className="text-slate-300 mt-4 leading-7">
-                  {item.text}
-                </p>
-              </div>
-            );
-          })}
+          <p className="text-slate-400 text-base max-w-xl mx-auto leading-7">
+            Join Smart Garage and manage your garage services through a modern
+            dashboard built for providers.
+          </p>
         </div>
 
-        <div className="mt-14 bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl max-w-4xl mx-auto">
-          <ShieldCheck className="text-green-400 mx-auto mb-4" size={46} />
+        {/* feature cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {features.map(({ icon: Icon, title, text }, i) => (
+            <div
+              key={title}
+              className="group rounded-2xl border border-white/[0.07] p-6 hover:border-blue-500/30 transition-all duration-300 space-y-4"
+              style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(20px)" }}
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                  <Icon size={22} className="text-blue-400" />
+                </div>
+                <span className="text-slate-700 text-sm font-mono">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
 
-          <h2 className="text-3xl font-bold">
-            Ready to join us?
-          </h2>
+              <div>
+                <h2
+                  className="text-lg font-black text-white mb-1"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  {title}
+                </h2>
+                <p className="text-slate-400 text-sm leading-6">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
-          <p className="text-slate-300 mt-4">
-            Submit your provider request and start managing your garage smarter.
-          </p>
+        {/* CTA */}
+        <div
+          className="rounded-2xl border border-blue-500/20 p-8 md:p-10 text-center space-y-5"
+          style={{ background: "rgba(59,130,246,0.05)", backdropFilter: "blur(20px)" }}
+        >
+          <div className="w-14 h-14 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto">
+            <ShieldCheck size={26} className="text-green-400" />
+          </div>
 
-          <button className="mt-8 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition px-8 py-4 rounded-2xl font-semibold shadow-lg">
+          <div>
+            <h2
+              className="text-2xl md:text-3xl font-black text-white"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Ready to join us?
+            </h2>
+            <p className="text-slate-400 mt-2 text-sm max-w-md mx-auto">
+              Submit your provider request and start managing your garage smarter.
+            </p>
+          </div>
+
+          <button
+            className="group inline-flex items-center gap-2 px-7 py-3 rounded-xl font-semibold text-white text-sm transition-all duration-300 hover:scale-105"
+            style={{ background: "linear-gradient(135deg, #3b82f6, #1d4ed8)" }}
+          >
             Apply Now
-            <ArrowRight size={20} />
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
+
       </section>
     </main>
   );

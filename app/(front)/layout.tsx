@@ -1,24 +1,18 @@
-// import Footer from "@/components/Frontend/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
-// import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import React from "react";
-// import 'leaflet/dist/leaflet.css';
-// import MegaMenu from "@/components/Frontend/MegaMenu";
 
-export default async function Layout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  //   const session = await getServerSession(authOptions);
   return (
-    <div className="">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#060d1f] text-white">
       <SiteHeader />
-      <div>{children}</div>
 
-      {/* <SiteFooter /> */}
-      {/* <Footer /> */}
+      <main className="relative z-0 w-full overflow-x-hidden">
+        {children}
+      </main>
     </div>
   );
 }

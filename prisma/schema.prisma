@@ -19,7 +19,15 @@ model User {
   password      String
   role          Role     @default(USER)
 
+  phone         String?
+
+  isVerified        Boolean @default(false)
+
+  // 🔥 مهم جدًا
+  verificationToken String? @unique
+
   vehicles      Vehicle[]
+  bookings      Booking[]
   reservations  Reservation[]
   payments      Payment[]
   notifications Notification[]
@@ -27,9 +35,9 @@ model User {
   createdAt     DateTime @default(now())
 }
 
+/* ---------------- VEHICLE ---------------- */
 model Vehicle {
   id          Int      @id @default(autoincrement())
-
   plateNumber String
   brand       String
   model       String
@@ -41,12 +49,31 @@ model Vehicle {
   createdAt   DateTime @default(now())
 }
 
+/* ---------------- BOOKING ---------------- */
+model Booking {
+  id          Int      @id @default(autoincrement())
+
+  carNumber   String
+  slotNumber  String
+  status      String   @default("active")
+
+  startTime   DateTime @default(now())
+  endTime     DateTime?
+
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+/* ---------------- RESERVATION ---------------- */
 model Reservation {
   id          Int      @id @default(autoincrement())
 
   slotNumber  String
   startTime   DateTime
   endTime     DateTime
+
   status      String   @default("active")
 
   userId      Int
@@ -55,6 +82,7 @@ model Reservation {
   createdAt   DateTime @default(now())
 }
 
+/* ---------------- PAYMENT ---------------- */
 model Payment {
   id          Int      @id @default(autoincrement())
 
@@ -68,6 +96,7 @@ model Payment {
   createdAt   DateTime @default(now())
 }
 
+/* ---------------- NOTIFICATION ---------------- */
 model Notification {
   id          Int      @id @default(autoincrement())
 

@@ -1,8 +1,9 @@
-import { MainNavItem } from "@/types/nav";
-
-export interface DocsConfig {
-  mainNav: MainNavItem[];
-}
+type DocsConfig = {
+  mainNav: {
+    title: string;
+    href: string;
+  }[];
+};
 
 export const docsConfig: DocsConfig = {
   mainNav: [
@@ -11,24 +12,40 @@ export const docsConfig: DocsConfig = {
       href: "/",
     },
     {
-      title: "About",
-      href: "/about",
+      title: "Parking Status",
+      href: "/parking-status",
+    },
+    {
+      title: "Booking",
+      href: "/booking",
     },
     {
       title: "History",
       href: "/history",
     },
     {
+      title: "Pricing",
+      href: "/pricing",
+    },
+    {
+      title: "FAQ",
+      href: "/faq",
+    },
+    {
+      title: "Parking Map",
+      href: "/parking-map",
+    },
+    {
+      title: "Smart Features",
+      href: "/smart-features",
+    },
+    {
+      title: "Team",
+      href: "/team",
+    },
+    {
       title: "Profile",
       href: "/profile",
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-    },
-    {
-      title: "Be Services Provider",
-      href: "/provider",
     },
   ],
 };

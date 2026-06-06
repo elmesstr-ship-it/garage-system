@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
@@ -20,26 +20,44 @@ export const metadata: Metadata = {
   description: "Smart Garage Management System",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full`}
     >
-      <body className="min-h-screen bg-white text-slate-900 transition-colors duration-300 dark:bg-[#0b1020] dark:text-white">
+      <body className="min-h-screen w-full overflow-x-hidden bg-[#060d1f] text-white antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
         >
-          {children}
+          <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
+            {children}
+          </div>
 
-          <Toaster position="top-right" />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: "#101827",
+                color: "#fff",
+                border: "1px solid rgba(255,255,255,0.1)",
+              },
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

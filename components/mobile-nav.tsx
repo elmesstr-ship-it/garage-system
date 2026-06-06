@@ -1,136 +1,130 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link, { LinkProps } from "next/link"
-import { useRouter } from "next/navigation"
-
-import { docsConfig } from "@/config/docs"
-import { cn } from "@/lib/utils"
-import { useMetaColor } from "@/hooks/use-meta-color"
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
-import { Microscope } from "lucide-react"
+  CarFront,
+  Home,
+  LayoutDashboard,
+  CalendarCheck,
+  Info,
+  Phone,
+  Menu,
+  X,
+} from "lucide-react";
+
+const mobileNavLinks = [
+  { name: "Home", path: "/", icon: Home },
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { name: "Bookings", path: "/dashboard/bookings", icon: CalendarCheck },
+  { name: "About", path: "/about", icon: Info },
+  { name: "Contact", path: "/contact", icon: Phone },
+];
 
 export function MobileNav() {
-  const MobileNavLinks = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "Fine Doctor",
-      path: "/find-doctor",
-    },
-    {
-      name: "Telehealth Vist",
-      path: "/telehealth",
-    },
-    {
-      name: "In-Persone Vist",
-      path: "/inpersone",
-    },
-    {
-      name: "About",
-      path: "/about",
-    },
-    {
-      name: "Be Services Provider",
-      path: "/contact",
-    },
-  ];
-  const [open, setOpen] = React.useState(false)
-  const { setMetaColor, metaColor } = useMetaColor()
+  const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const onOpenChange = React.useCallback(
-    (open: boolean) => {
-      setOpen(open)
-      setMetaColor(open ? "#09090b" : metaColor)
-    },
-    [setMetaColor, metaColor]
-  )
+  function openMenu() {
+    setOpen(true);
+  }
+
+  function closeMenu() {
+    setOpen(false);
+  }
+
+  function goTo(path: string) {
+    setOpen(false);
+    router.push(path);
+  }
 
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerTrigger asChild>
-        <Button
-          variant="ghost"
-          className="h-8 w-full gap-4 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="!size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 9h16.5m-16.5 6.75h16.5"
-            />
-          </svg>
-          <span className="sr-only">Toggle Menu</span>
-          <span className="flex h-8 flex-1 items-center justify-between rounded-md border bg-muted/50 px-2 text-sm font-normal text-muted-foreground shadow-none">
-            Search documentation...
-          </span>
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent className="max-h-[80svh] p-0">
-        <div className="overflow-auto p-6">
-          <div className="flex flex-col space-y-3">
-          <h2 className="flex font-semibold">
-          <Microscope className="mr-2 w-4 h-4"/>
-          Online Docs
-          </h2>
-            {docsConfig.mainNav?.map(
-              (item) =>
-                item.href && (
-                  <MobileLink
-                    key={item.href}
-                    href={item.href}
-                    onOpenChange={setOpen}
+    <>
+      <button
+        type="button"
+        onClick={openMenu}
+        onPointerDown={(e) => {
+          e.preventDefault();
+          openMenu();
+        }}
+        className="relative z-[99999] flex h-11 w-11 touch-manipulation items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white hover:border-blue-500/40 hover:bg-blue-500/10 md:hidden"
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
+      {open && (
+        <div className="fixed inset-0 z-[999999] md:hidden">
+          <button
+            type="button"
+            onClick={closeMenu}
+            onPointerDown={(e) => {
+              e.preventDefault();
+              closeMenu();
+            }}
+            className="absolute inset-0 touch-manipulation bg-black/70"
+          />
+
+          <div className="absolute left-0 top-0 z-[1000000] h-full w-[82%] max-w-[320px] border-r border-white/10 bg-[#060d1f] p-5 text-white shadow-2xl">
+            <div className="mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-500/30 bg-blue-500/10">
+                  <CarFront className="h-6 w-6 text-blue-400" />
+                </div>
+
+                <div>
+                  <h2 className="text-base font-bold">Smart Garage</h2>
+                  <p className="text-xs text-slate-500">
+                    Smart Parking System
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={closeMenu}
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  closeMenu();
+                }}
+                className="flex h-10 w-10 touch-manipulation items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <nav className="flex flex-col gap-2">
+              {mobileNavLinks.map((item) => {
+                const Icon = item.icon;
+                const active = pathname === item.path;
+
+                return (
+                  <button
+                    key={item.path}
+                    type="button"
+                    onClick={() => goTo(item.path)}
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      goTo(item.path);
+                    }}
+                    className={`flex touch-manipulation items-center gap-3 rounded-2xl border px-4 py-3 text-left text-sm font-medium transition ${
+                      active
+                        ? "border-blue-500/30 bg-blue-500/15 text-blue-300"
+                        : "border-white/10 bg-white/[0.04] text-slate-300 hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-white"
+                    }`}
                   >
-                    {item.title}
-                  </MobileLink>
-                )
-            )}
+                    <Icon className="h-5 w-5" />
+                    {item.name}
+                  </button>
+                );
+              })}
+            </nav>
           </div>
         </div>
-      </DrawerContent>
-    </Drawer>
-  )
+      )}
+    </>
+  );
 }
 
-interface MobileLinkProps extends LinkProps {
-  onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
-  className?: string
-}
-
-function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: MobileLinkProps) {
-  const router = useRouter()
-  return (
-    <Link
-      href={href}
-      onClick={() => {
-        router.push(href.toString())
-        onOpenChange?.(false)
-      }}
-      className={cn("text-[1.15rem]", className)}
-      {...props}
-    >
-      {children}
-    </Link>
-  )
-}
+export default MobileNav;

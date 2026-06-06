@@ -1,104 +1,330 @@
-import { Car, ShieldCheck, LayoutDashboard, Users, Zap, CheckCircle } from "lucide-react";
+import { Car, ShieldCheck, LayoutDashboard } from "lucide-react";
+
+const features = [
+  {
+    icon: Car,
+    title: "Smart Parking",
+    text: "Real-time parking management for faster and easier vehicle access.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Secure Access",
+    text: "Safe and reliable parking reservation and vehicle management.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Admin Dashboard",
+    text: "Clean control panel for parking operations, bookings, and users.",
+  },
+];
+
+const checks = [
+  "Easy parking control",
+  "Secure user access",
+  "Live slot tracking",
+  "Modern dashboard",
+];
+
+const stats = [
+  { value: "24/7", label: "Garage Monitoring", accent: true },
+  { value: "4+", label: "Parking Slots", accent: false },
+  { value: "15 Min", label: "Reservation Hold", accent: false },
+];
 
 export default function About() {
-  const features = [
-    {
-      icon: Car,
-      title: "Smart Parking",
-      text: "Real-time parking management for faster and easier vehicle access.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Secure Access",
-      text: "Organized user roles and safer garage operations.",
-    },
-    {
-      icon: LayoutDashboard,
-      title: "Admin Dashboard",
-      text: "Clean control panel for admins, users, and service providers.",
-    },
-  ];
-
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white">
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-400/30 px-4 py-2 text-blue-300 text-sm font-semibold">
-              <Zap size={16} /> Smart Garage System
-            </span>
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-            <h1 className="mt-6 text-5xl md:text-7xl font-extrabold leading-tight">
-              About <span className="text-blue-400">RAKNAH</span>
-            </h1>
+        .ab-root {
+          font-family: 'DM Sans', sans-serif;
+          min-height: 100vh;
+          background: #090d18;
+          color: #fff;
+        }
 
-            <p className="mt-6 text-slate-300 text-lg leading-8 max-w-xl">
-              RAKNAH is a modern garage management platform designed to make
-              parking smarter, faster, and more secure through digital
-              monitoring, service provider integration, and powerful dashboards.
-            </p>
+        /* ── CSS variables: light mode ── */
+        .ab-root {
+          --ab-bg:          #090d18;
+          --ab-card:        rgba(255,255,255,0.04);
+          --ab-border:      rgba(255,255,255,0.07);
+          --ab-text:        #f1f5f9;
+          --ab-muted:       rgba(255,255,255,0.4);
+          --ab-sub:         rgba(255,255,255,0.45);
+          --ab-check:       rgba(255,255,255,0.6);
+          --ab-divider:     rgba(255,255,255,0.06);
+          --ab-accent-bg:   rgba(59,130,246,0.12);
+          --ab-accent-brd:  rgba(59,130,246,0.25);
+          --ab-accent-text: #93c5fd;
+          --ab-stat-val:    #fff;
+        }
 
-            <div className="mt-8 grid sm:grid-cols-2 gap-4 text-slate-200">
-              <p className="flex items-center gap-2">
-                <CheckCircle className="text-blue-400" size={20} />
-                Easy parking control
-              </p>
-              <p className="flex items-center gap-2">
-                <CheckCircle className="text-blue-400" size={20} />
-                Secure user access
-              </p>
-              <p className="flex items-center gap-2">
-                <CheckCircle className="text-blue-400" size={20} />
-                Provider support
-              </p>
-              <p className="flex items-center gap-2">
-                <CheckCircle className="text-blue-400" size={20} />
-                Modern dashboard
-              </p>
-            </div>
+        @media (prefers-color-scheme: light) {
+          .ab-root {
+            --ab-bg:          #f5f5f0;
+            --ab-card:        rgba(0,0,0,0.03);
+            --ab-border:      rgba(0,0,0,0.08);
+            --ab-text:        #0f172a;
+            --ab-muted:       #64748b;
+            --ab-sub:         #475569;
+            --ab-check:       #334155;
+            --ab-divider:     rgba(0,0,0,0.07);
+            --ab-accent-bg:   rgba(59,130,246,0.08);
+            --ab-accent-brd:  rgba(59,130,246,0.2);
+            --ab-accent-text: #1d4ed8;
+            --ab-stat-val:    #0f172a;
+          }
+          .ab-root { background: var(--ab-bg); color: var(--ab-text); }
+          .ab-headline { color: var(--ab-text) !important; }
+          .ab-headline span { color: #2563eb !important; }
+          .ab-chip-dot { box-shadow: none !important; }
+          .ab-feat-icon-wrap { background: rgba(59,130,246,0.08) !important; }
+        }
+
+        .ab-inner {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 64px 40px;
+        }
+
+        /* ── Chip ── */
+        .ab-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(59,130,246,0.1);
+          border: 0.5px solid rgba(59,130,246,0.25);
+          border-radius: 999px;
+          padding: 5px 14px 5px 10px;
+          margin-bottom: 24px;
+          width: fit-content;
+        }
+        .ab-chip-dot {
+          width: 7px; height: 7px;
+          border-radius: 50%;
+          background: #3b82f6;
+          box-shadow: 0 0 5px #3b82f6;
+        }
+        .ab-chip-txt {
+          font-size: 11px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.55);
+        }
+
+        /* ── Hero grid ── */
+        .ab-hero {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 48px;
+          align-items: center;
+          margin-bottom: 56px;
+        }
+
+        .ab-headline {
+          font-family: 'Syne', sans-serif;
+          font-size: clamp(2.2rem, 4vw, 3.2rem);
+          font-weight: 800;
+          color: #fff;
+          line-height: 1.05;
+          letter-spacing: -0.02em;
+          margin-bottom: 16px;
+        }
+        .ab-headline span { color: #3b82f6; }
+
+        .ab-sub {
+          font-size: 14px;
+          color: var(--ab-sub);
+          line-height: 1.75;
+          max-width: 400px;
+          margin-bottom: 28px;
+        }
+
+        /* ── Checks ── */
+        .ab-checks {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .ab-check {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          font-size: 13px;
+          color: var(--ab-check);
+        }
+        .ab-check-icon {
+          width: 18px; height: 18px;
+          border-radius: 50%;
+          background: rgba(59,130,246,0.15);
+          border: 0.5px solid rgba(59,130,246,0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          color: #3b82f6;
+        }
+
+        /* ── Feature panel (right side) ── */
+        .ab-feat-panel {
+          background: var(--ab-card);
+          border: 0.5px solid var(--ab-border);
+          border-radius: 14px;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .ab-feat-card {
+          background: var(--ab-card);
+          border: 0.5px solid var(--ab-border);
+          border-radius: 10px;
+          padding: 16px;
+          transition: background 0.15s;
+        }
+        .ab-feat-card:hover { background: rgba(255,255,255,0.07); }
+        .ab-feat-icon-wrap {
+          width: 36px; height: 36px;
+          border-radius: 9px;
+          background: rgba(59,130,246,0.12);
+          border: 0.5px solid rgba(59,130,246,0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 10px;
+          color: #3b82f6;
+        }
+        .ab-feat-title {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--ab-text);
+          margin-bottom: 4px;
+        }
+        .ab-feat-sub {
+          font-size: 12px;
+          color: var(--ab-muted);
+          line-height: 1.65;
+        }
+
+        /* ── Divider ── */
+        .ab-divider {
+          height: 0.5px;
+          background: var(--ab-divider);
+          margin-bottom: 36px;
+        }
+
+        /* ── Stats ── */
+        .ab-stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+        }
+        .ab-stat {
+          background: var(--ab-card);
+          border: 0.5px solid var(--ab-border);
+          border-radius: 12px;
+          padding: 24px 20px;
+          text-align: center;
+        }
+        .ab-stat.ab-accent {
+          background: var(--ab-accent-bg);
+          border-color: var(--ab-accent-brd);
+        }
+        .ab-stat-val {
+          font-family: 'Syne', sans-serif;
+          font-size: 2rem;
+          font-weight: 800;
+          color: var(--ab-stat-val);
+          letter-spacing: -0.02em;
+        }
+        .ab-stat.ab-accent .ab-stat-val { color: var(--ab-accent-text); }
+        .ab-stat-lbl {
+          font-size: 11px;
+          color: var(--ab-muted);
+          margin-top: 6px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+          .ab-inner { padding: 40px 20px; }
+          .ab-hero { grid-template-columns: 1fr; gap: 28px; }
+          .ab-stats { grid-template-columns: 1fr; }
+          .ab-checks { grid-template-columns: 1fr; }
+        }
+      `}</style>
+
+      <main className="ab-root">
+        <div className="ab-inner">
+
+          {/* Chip */}
+          <div className="ab-chip">
+            <div className="ab-chip-dot" />
+            <span className="ab-chip-txt">Smart Garage System</span>
           </div>
 
-          <div className="relative">
-            <div className="absolute -inset-6 bg-blue-500/20 blur-3xl rounded-full" />
-            <div className="relative bg-white/10 border border-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl">
-              <div className="grid gap-5">
-                {features.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.title}
-                      className="bg-white/10 border border-white/10 rounded-2xl p-6 hover:bg-white/15 transition"
-                    >
-                      <Icon className="text-blue-400 mb-4" size={34} />
-                      <h2 className="text-2xl font-bold">{item.title}</h2>
-                      <p className="text-slate-300 mt-2 leading-7">
-                        {item.text}
-                      </p>
+          {/* Hero */}
+          <div className="ab-hero">
+
+            {/* Left — text */}
+            <div>
+              <h1 className="ab-headline">
+                About <span>RAKNAH</span>
+              </h1>
+              <p className="ab-sub">
+                RAKNAH is a modern parking management platform designed to provide
+                real-time slot booking, secure access, and efficient vehicle
+                tracking through a simple and intuitive dashboard.
+              </p>
+              <div className="ab-checks">
+                {checks.map((c) => (
+                  <div key={c} className="ab-check">
+                    <div className="ab-check-icon">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                        <path d="M2 5l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                     </div>
-                  );
-                })}
+                    {c}
+                  </div>
+                ))}
               </div>
             </div>
+
+            {/* Right — feature cards */}
+            <div className="ab-feat-panel">
+              {features.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div key={f.title} className="ab-feat-card">
+                    <div className="ab-feat-icon-wrap">
+                      <Icon size={18} />
+                    </div>
+                    <p className="ab-feat-title">{f.title}</p>
+                    <p className="ab-feat-sub">{f.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+
           </div>
+
+          {/* Divider */}
+          <div className="ab-divider" />
+
+          {/* Stats */}
+          <div className="ab-stats">
+            {stats.map((s) => (
+              <div key={s.label} className={`ab-stat${s.accent ? " ab-accent" : ""}`}>
+                <p className="ab-stat-val">{s.value}</p>
+                <p className="ab-stat-lbl">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
-
-        <div className="mt-20 grid md:grid-cols-3 gap-6">
-          <div className="rounded-3xl bg-blue-600 p-8 text-center shadow-xl">
-            <h3 className="text-4xl font-extrabold">24/7</h3>
-            <p className="mt-2 text-blue-100">Garage Monitoring</p>
-          </div>
-
-          <div className="rounded-3xl bg-white/10 border border-white/10 p-8 text-center shadow-xl">
-            <h3 className="text-4xl font-extrabold">3</h3>
-            <p className="mt-2 text-slate-300">User Roles</p>
-          </div>
-
-          <div className="rounded-3xl bg-white/10 border border-white/10 p-8 text-center shadow-xl">
-            <h3 className="text-4xl font-extrabold">AI</h3>
-            <p className="mt-2 text-slate-300">Smart Vehicle Tracking</p>
-          </div>
-        </div>
-      </section>
-    </main>
+      </main>
+    </>
   );
 }

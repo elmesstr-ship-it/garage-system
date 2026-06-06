@@ -1,0 +1,19 @@
+[debug] [2026-06-05T15:39:01.480Z] ----------------------------------------------------------------------
+[debug] [2026-06-05T15:39:01.482Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\elmes\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-06-05T15:39:01.482Z] CLI Version:   15.19.1
+[debug] [2026-06-05T15:39:01.482Z] Platform:      win32
+[debug] [2026-06-05T15:39:01.482Z] Node Version:  v24.16.0
+[debug] [2026-06-05T15:39:01.482Z] Time:          Fri Jun 05 2026 18:39:01 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-06-05T15:39:01.482Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\elmes\Downloads\Garage-system-main\Garage-system-main
+
